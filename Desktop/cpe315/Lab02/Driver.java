@@ -18,6 +18,20 @@ public class Driver {
 			}
 			lineNumber++;
 		}
+		lineScanner = new Scanner(file);
+		lineNumber = 0;
+		while (lineScanner.hasNext()) {
+			Scanner currentLine = new Scanner(lineScanner.nextLine());
+			String currentWord = lineScanner.next();
+			if (!isLabel(currentWord, labelList)) {
+				if (isValid(currentWord)) {
+					
+				}
+				else {
+					System.exit(-1);
+				}
+			}
+		}
 	}
 
 	private static boolean isValid(String instruction) {
@@ -35,12 +49,21 @@ public class Driver {
 		public int lineNumber;
 
 		public Label(String name, int lineNumber) {
-			this.name=name.substring(0, name.length()-1);
+			this.name=name;
 			this.lineNumber=lineNumber;
 		}
 	}
 
 	private static Label makeLabel(String name, int lineNumber) {
 		return new Label(name, lineNumber);
+	}
+
+	private static boolean isLabel(String word, ArrayList<Label> labList) {
+		for (Label label: labList) {
+			if ((label.name).equals(word)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
